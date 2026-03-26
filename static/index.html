@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Планировщик</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/main.css"/>
+</head>
+<body>
+
+  <canvas id="fx-canvas"></canvas>
+
+  <div class="app">
+    <!-- ── SIDEBAR NAV ──────────────────────────────── -->
+    <nav class="sidenav">
+      <div class="sidenav-logo">
+        <span class="logo-mark">◈</span>
+      </div>
+
+      <div class="sidenav-links">
+        <button class="nav-link active" data-page="today"     title="Сегодня">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>
+          <span>Сегодня</span>
+        </button>
+        <button class="nav-link" data-page="calendar"  title="Календарь">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 4v2M16 4v2M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+          <span>Календарь</span>
+        </button>
+        <button class="nav-link" data-page="analytics" title="Аналитика">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <span>Аналитика</span>
+        </button>
+        <button class="nav-link" data-page="focus"     title="Фокус">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          <span>Фокус</span>
+        </button>
+      </div>
+
+      <div class="sidenav-bottom">
+        <div class="streak-pill" id="nav-streak">
+          <span>🔥</span><span id="nav-streak-n">0</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ── PAGE CONTENT ─────────────────────────────── -->
+    <div class="page-wrap" id="page-wrap">
+      <!-- pages mount here -->
+    </div>
+  </div>
+
+  <!-- ── GLOBAL MODALS ─────────────────────────────── -->
+
+  <!-- Task quick-add / edit drawer -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <div class="drawer" id="task-drawer">
+    <div class="drawer-head">
+      <span id="drawer-title-label">Новая задача</span>
+      <button class="drawer-close" id="drawer-close">✕</button>
+    </div>
+    <div class="drawer-body">
+      <input type="text"   id="d-title"    class="d-input d-title" placeholder="Что нужно сделать?"/>
+      <div class="d-row">
+        <select id="d-priority" class="d-select">
+          <option value="low">🟢 Низкий</option>
+          <option value="medium" selected>🟡 Средний</option>
+          <option value="high">🔴 Высокий</option>
+        </select>
+        <select id="d-category" class="d-select">
+          <option value="work">💼 Работа</option>
+          <option value="personal">🏠 Личное</option>
+          <option value="health">💪 Здоровье</option>
+          <option value="study">📚 Учёба</option>
+          <option value="general">🗂 Прочее</option>
+        </select>
+      </div>
+      <div class="d-row">
+        <input type="time" id="d-time"     class="d-input" title="Время"/>
+        <input type="date" id="d-date"     class="d-input"/>
+      </div>
+      <div id="d-subtasks-section">
+        <div class="d-label">Подзадачи</div>
+        <div id="d-subtasks-list"></div>
+        <div class="d-sub-add">
+          <input type="text" id="d-sub-inp" class="d-input" placeholder="+ Подзадача…"/>
+        </div>
+      </div>
+    </div>
+    <div class="drawer-foot">
+      <button class="btn-ghost" id="drawer-delete" style="display:none">Удалить</button>
+      <button class="btn-primary" id="drawer-save">Сохранить</button>
+    </div>
+  </div>
+
+  <!-- ── SCRIPTS ───────────────────────────────────── -->
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/effects.js"></script>
+  <script src="/static/js/timer.js"></script>
+  <script src="/static/js/pages/today.js"></script>
+  <script src="/static/js/pages/calendar.js"></script>
+  <script src="/static/js/pages/analytics.js"></script>
+  <script src="/static/js/pages/focus.js"></script>
+  <script src="/static/js/router.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
